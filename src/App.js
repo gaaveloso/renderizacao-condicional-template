@@ -1,6 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components";
 import TelaLogin from "./components/TelaLogin/TelaLogin";
 import TelaCadastro from "./components/TelaCadastro/TelaCadastro";
+import TelaUsuarioCadastrado from "./components/TelaUsuarioCadastrado/TelaUsuarioCadastrado"
+import { useState } from "react";
 
 const GlobalStyled = createGlobalStyle`
   *{
@@ -15,11 +17,26 @@ const MainContainer = styled.main`
 
 function App() {
 
+  const [tela, setTela]= useState(1)
+  const [renderCadastro, setRenderCadastro] = useState(1)
+
+  const cadastro = () => {
+    setTela(2)
+  }
+
+  const possuoCadastro = () => {
+    setTela(1)
+  }
+
+  const renderTelaCadastro = () => {
+    setRenderCadastro(2)
+  }
+  console.log(renderCadastro)
+  console.log('Estou na tela',tela)
   return (
     <MainContainer >
       <GlobalStyled />
-      <TelaLogin />
-      <TelaCadastro />
+      {tela === 1 ? <TelaLogin cadastro={cadastro}/> : <TelaCadastro possuoCadastro={possuoCadastro}/>}
     </MainContainer>
   );
 }
